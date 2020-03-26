@@ -2,6 +2,5 @@
 "gui":"pytomicDEX",
 "netid":9999,
 "rpc_password":"",
-"passphrase":"",
-"userhome":""
+"passphrase":""
 }
