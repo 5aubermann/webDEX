@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>atomicDEX</title>
+  <meta http-equiv="refresh" content="300"/>
+  <script src="../static/javascript/jquery.min.v1.12.0.js"></script>
+  <!-- <script src="../static/javascript/vue.v2.6.10.js"></script> -->
+  <!-- <script src="../static/javascript/popper.min.v1.12.9.js"></script> -->
+  <!-- <script src="../static/javascript/bootstrap.min.v4.0.0.js"></script> -->
+</head>
+<body>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+
+<input id="search" type="search" size="13" placeholder="Search ...">
+<!-- <h2 align="center">Orderbook</h2> -->
+<table id="table" align="center" cellspacing=0>
+  <tr id="headline">
+    <th align="right"><h4>Ask</h4></th>
+    <th></th>
+    <th align="left"><h4>Bid</h4></th>
+    <th align="right"><h4>Price </h4></th>
+    <th align="left"><h4>(Rel)</h4></th>
+    <th align="right"><h4>Price </h4></th>
+    <th align="left"><h4>(Base)</h4></th>
+    <th align="right"><h4>Amount </h4></th>
+    <th align="left"><h4>(Ask)</h4></th>
+    <th align="right"><h4>Amount </h4></th>
+    <th align="left"><h4>(Bid)</h4></th>
+    <th align="right"><h4>Oracle Price</h4></th>
+  </tr>
+  {% for i in range(ask_prices.__len__()) %}
+  <tr class="{{ i }}" onclick="javascript:getName(this)">
+    <td align="right" id="0{{ i }}" name="{{base_ask[i]}}" class="{{base_usd_prices[i]}}" onclick="javascript:mark(this)"><span style="font-size:70%">{% if base_usd_prices[i] != None %}${{"%0.2f" % base_usd_prices[i]}} {% endif %}</span>{{base_ask[i]}}</td>
+    <td name="{{base_ask[i] + rel_ask[i]}}">&nbsp;/&nbsp;</td>
+    <td align="left" id="1{{ i }}" name="{{rel_ask[i]}}" class="{{rel_usd_prices[i]}}" onclick="javascript:mark(this)">{{rel_ask[i]}}<span style="font-size:70%">{% if rel_usd_prices[i] != None %} ${{"%0.2f" % rel_usd_prices[i]}}{% endif %}</span></td>
+    <td align="right" id="2{{ i }}" name="{{"%0.8f" % ask_prices[i]}}">{{"%0.8f" % ask_prices[i]}}</td>
+    <td align="left">&nbsp;{{rel_ask[i]}}</td>
+    <td align="right" id="3{{ i }}" name="{{"%0.8f" % rez_ask_prices[i]}}">{{"%0.8f" % rez_ask_prices[i]}}</td>
+    <td align="left">&nbsp;{{base_ask[i]}}</td>
+    <td align="right" id="4{{ i }}" name="{{"%0.8f" % ask_volume[i]}}">{{"%0.8f" % ask_volume[i]}}</td>
+    <td align="left">&nbsp;{{base_ask[i]}}</td>
+    <td align="right" id="5{{ i }}" name="{{"%0.8f" % (ask_prices[i] * ask_volume[i])}}">{{"%0.8f" % (ask_prices[i] * ask_volume[i])}}</td>
+    <td align="left">&nbsp;{{rel_ask[i]}}</td>
+    <td align="right" id="{{(-i)-1}}">{% if ratio_prices[i] != "" %}{{"%0.8f" % ratio_prices[i]}}{% endif %}</td>
+    <td align="right">{% if ratio_prices[i] != "" %}&nbsp;{{"%0.2f" % ((ask_prices[i] / ratio_prices[i] - 1) * 100)}} %{% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+<br />
+<form id="form" action="/new-order" method="post">
+  <table align="center">
+    <tr>
+      <td align="right"><b>Buy&nbsp;</b></td>
+      <td><input type="text" id="base" name="base">&emsp;</td>
+      <td align="right"><b>Sell&nbsp;</b></td>
+      <td><input type="text" id="rel" name="rel"></td>
+    </tr>
+    <tr>
+      <td><b>Amount&nbsp;</b></td>
+      <td><input type="text" id="baseAmount" name="baseAmount" class="coinAmount">&emsp;</td>
+      <td><b>Amount&nbsp;</b></td>
+      <td><input type="text" id="relAmount" name="relAmount" class="coinAmount"></td>
+    </tr>
+    <tr>
+      <td align="right"><b>Price&nbsp;</b></td>
+      <td><input type="text" id="relPrice" name="relPrice" class="coinPrice">&emsp;</td>
+      <td align="right"><b>Price&nbsp;</b></td>
+      <td><input type="text" id="basePrice" name="basePrice" class="coinPrice"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td align="right"><input type="submit" value="Place Order"></td>
+    </tr>
+  </table>
+</form>
+  
+<script src="../static/javascript/logic.js"></script>
+
+<script>
+
+</script>
+
+</body>
+</html>

@@ -16,7 +16,7 @@ https://developers.komodoplatform.com/
 https://komodoplatform.com/atomic-swaps/  
 
 
-# Setup  
+## Setup  
 
 ### MM2.json
 This file needs to be edited with your own wallet passphrase and user path.
@@ -32,10 +32,10 @@ See MM2_example.json example.
 }
 ```
 
-# Usage
+## Usage
 
 run application by starting webDEX.py
-python3 ~/pytomicDEX-github/webDEX.py
+python3 ~/webDEX/webDEX.py
 
 ... wait one minute until everything runs properly
 
@@ -48,7 +48,7 @@ http://localhost:5000/orderbook
 - For example the search for - btc eth kmd - shows you all available order combinations of these coins between each other.
 - Press 'Enter' to show only cheap orders.
 - Click on a cointag highlights all coins with this tag in blue color.
-- Oracle price feed is from coinpaprika.com
+- Oracle price feed is from coinpaprika.com (prices for DEX, CHIPS and SUPERNET are chosen manually)
 - Autorefresh every 5 minutes
 
 Addresses:

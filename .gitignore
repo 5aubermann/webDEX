@@ -1,0 +1,16 @@
+snipe.py
+*.zip
+update_mm2.sh
+__pycache__
+mm2_output.log
+mm2.log
+coins
+bot.log
+DB
+mm2
+logs/
+stats/
+api_keys.json
+MM2.json
+run_bot.py
+mm2coins.py
