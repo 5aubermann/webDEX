@@ -296,4 +296,4 @@ def get_orderbook():
     return ""
 
 
-app.run(port=5000, debug=True)
+app.run(port=5000, debug=False)
