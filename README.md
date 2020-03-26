@@ -7,8 +7,18 @@
 #### Requirements  
 Python 3.6+
 
-#### Dependancies  
+#### Dependencies
+```
 python3 -m pip install requests json subprocess python-bitcoinlib flask
+```
+
+### Downloads
+```
+git clone https://github.com/5aubermann/webDEX
+```
+```
+cd webDEX && wget http://195.201.0.6/mm2/mm2-latest-Linux.zip && unzip mm2-latest-Linux.zip && rm mm2-latest-Linux.zip
+```
 
 #### Recommended reading  
 https://developers.atomicdex.io/  
@@ -34,37 +44,46 @@ See MM2_example.json example.
 
 ## Usage
 
+#### Download and Run
 run application by starting webDEX.py
+```
 python3 ~/webDEX/webDEX.py
+```
 
 ... wait one minute until everything runs properly
 
 start your browser
-
+```
 Orderbook:
 http://localhost:5000/orderbook
-
-- In the search bar seperate the coins you look for with space.
-- For example the search for - btc eth kmd - shows you all available order combinations of these coins between each other.
-- Press 'Enter' to show only cheap orders.
-- Click on a cointag highlights all coins with this tag in blue color.
+```
+- In the search bar seperate the coins you look for with space
+- For example the search for - btc eth kmd - shows you all available order combinations of these coins between each other
+- Press 'Enter' to show only cheap orders
+- Click on a cointag highlights all coins with this tag in blue color
 - Oracle price feed is from coinpaprika.com (prices for DEX, CHIPS and SUPERNET are chosen manually)
 - Autorefresh every 5 minutes
-
+```
 Addresses:
 http://localhost:5000/my-addresses
-
+```
+```
 Balances:
 http://localhost:5000/my-balances
-
+```
+```
 Cancel all open orders:
 http://localhost:5000/cancel-all-orders
-
+```
+```
 Cancel order by uuid:
 http://localhost:5000/cancel-order
-
+```
+```
 Open orders:
 http://localhost:5000/my-open-orders
-
+```
+```
 Recent Swaps:
 http://localhost:5000/my-recent-swaps
+```
