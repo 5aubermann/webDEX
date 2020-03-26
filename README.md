@@ -1,6 +1,6 @@
 # webDEX
 
-### Build apon pytomicDEX. Shout out to smk762.
+### Build upon pytomicDEX. Shout out to smk762.
 
 ### A Python Application for using [Komodo Platform](https://komodoplatform.com/)'s [atomicDEX](https://atomicdex.io/) in the browser.  
 
