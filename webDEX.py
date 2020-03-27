@@ -3,7 +3,8 @@ from mm2_calls import *
 import random
 import concurrent.futures
 
-
+# this function retrieves the actual coin prices from the oracle (coinpaprika.com) synchronically (standard)
+# for async price fetching you need some proxy ips as the coinpaprika api doesn't allow many parallel requests from one ip
 def fetch_prices(urls, async):
     out = []
     CONNECTIONS = len(urls)
@@ -212,7 +213,7 @@ def get_orderbook():
 
     data = fetch_prices(urls, False)
 
-    # kmd_price
+    # get kmd_price
     kmd_price = None
     for i in range(len(base_ask)):
         for j in range(len(data)):
@@ -223,13 +224,15 @@ def get_orderbook():
                         break
             except KeyError:
                 continue
-
+    
+    # appending oracle (coinpaprika) coin prices
     for i in range(len(base_ask)):
         for j in range(len(data)):
             try:
                 if base_ask[i] == data[j]['symbol']:
                     base_usd_prices.append(float(data[j]['quotes']['USD']['price']))
                     break
+            # SAI price is not availible at coinpaprika so getting its price from coingecko (base side)
             except KeyError:
                 if base_ask[i] == "SAI":
                     data = requests.get("https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359&vs_currencies=usd", timeout=5).text
@@ -239,6 +242,7 @@ def get_orderbook():
                     except KeyError:
                         sai_price = 1
                     base_usd_prices.append(sai_price)
+                # some coin prices are chosen manually as a factor of KMD price (base side)
                 try:
                     if base_ask[i] == "DEX":
                         base_usd_prices.append(17.5 * kmd_price)
@@ -260,6 +264,7 @@ def get_orderbook():
                     rel_usd_prices.append(float(data[j]['quotes']['USD']['price']))
                     break
             except KeyError:
+                # SAI price is not availible at coinpaprika so getting its price from coingecko (rel side)
                 if rel_ask[i] == "SAI":
                     try:
                         rel_usd_prices.append(sai_price)
@@ -271,6 +276,7 @@ def get_orderbook():
                         except KeyError:
                             sai_price = 1
                         base_usd_prices.append(sai_price)
+                # some coin prices are chosen manually as a factor of KMD price (rel side)
                 try:
                     if rel_ask[i] == "DEX":
                         rel_usd_prices.append(17.5 * kmd_price)
