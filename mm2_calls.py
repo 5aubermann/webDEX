@@ -7,13 +7,9 @@ from subprocess import Popen
 from lib import coinslib
 
 
-# Get and set config
 cwd = os.getcwd()
 mm2_path = os.path.dirname(os.path.abspath(__file__))
 mm2log_path = os.path.dirname(os.path.abspath(__file__)) + "/logs"
-
-def get_modified_time(file):
-    return os.path.getmtime(file)
 
 with open(mm2_path+"/MM2.json") as j:
     mm2json = json.load(j)
@@ -23,7 +19,7 @@ node_ip = "http://127.0.0.1:7783"
 
 def help_mm2(node_ip, user_pass):
     params = {'userpass': user_pass, 'method': 'help'}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r.text
 
 def check_mm2_status(node_ip, user_pass):
@@ -43,7 +39,7 @@ def start_mm2(logfile):
 def stop_mm2(node_ip=node_ip, user_pass=user_pass):
     params = {'userpass': user_pass, 'method': 'stop'}
     try:
-        r = requests.post(node_ip, json=params)
+        r = requests.post(node_ip, json=params, timeout=60)
         print("Marketmaker 2 stopped. ")
     except:
         print("Marketmaker 2 was not running. ")
@@ -63,7 +59,7 @@ def enable(node_ip, user_pass, cointag, tx_history=True):
               'coin': cointag,
               'mm2':1,
               'tx_history':tx_history,}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r
 
 def electrum(node_ip, user_pass, cointag, tx_history=True):
@@ -83,14 +79,14 @@ def electrum(node_ip, user_pass, cointag, tx_history=True):
                   'coin': cointag,
                   'mm2': 1,
                   'tx_history': tx_history}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r
 
 def orderbook(node_ip=node_ip, user_pass=user_pass, base="KMD", rel="BTC"):
     params = {'userpass': user_pass,
               'method': 'orderbook',
               'base': base, 'rel': rel}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r
 
 def get_orders_json(node_ip=node_ip, user_pass=user_pass, coins=coinslib.coins):
@@ -117,7 +113,7 @@ def my_balance(cointag, node_ip=node_ip, user_pass=user_pass):
     params = {'userpass': user_pass,
               'method': 'my_balance',
               'coin': cointag}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r
 
 def buy(base, rel, basevolume, relprice, node_ip=node_ip, user_pass=user_pass):
@@ -127,13 +123,13 @@ def buy(base, rel, basevolume, relprice, node_ip=node_ip, user_pass=user_pass):
              'rel': rel,
              'volume': basevolume,
              'price': relprice}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r
 
 def my_orders(node_ip=node_ip, user_pass=user_pass):
     params = {'userpass': user_pass,
               'method': 'my_orders'}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r
 
 def my_recent_swaps(node_ip=node_ip, user_pass=user_pass, limit=10, from_uuid=''):
@@ -146,21 +142,21 @@ def my_recent_swaps(node_ip=node_ip, user_pass=user_pass, limit=10, from_uuid=''
                   'method': 'my_recent_swaps',
                   "limit": int(limit),
                   "from_uuid": from_uuid}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r
 
 def cancel_all(node_ip=node_ip, user_pass=user_pass):
     params = {'userpass': user_pass,
               'method': 'cancel_all_orders',
               'cancel_by': {"type": "All"}}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r
 
 def cancel_uuid(order_uuid, node_ip=node_ip, user_pass=user_pass):
     params = {'userpass': user_pass,
               'method': 'cancel_order',
               'uuid': order_uuid}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r
 
 def withdraw_all(cointag, address, node_ip=node_ip, user_pass=user_pass):
@@ -169,7 +165,7 @@ def withdraw_all(cointag, address, node_ip=node_ip, user_pass=user_pass):
               'coin': cointag,
               'to': address,
               'max': True}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r
 
 def send_raw_transaction(cointag, tx_hex, node_ip=node_ip, user_pass=user_pass):
@@ -177,14 +173,14 @@ def send_raw_transaction(cointag, tx_hex, node_ip=node_ip, user_pass=user_pass):
               'method': 'send_raw_transaction',
               'coin': cointag,
               'tx_hex': tx_hex}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r
 
 def get_trade_fee(cointag, node_ip=node_ip, user_pass=user_pass):
     params = {'userpass': user_pass,
               'method': 'get_trade_fee',
               'coin': cointag}
-    r = requests.post(node_ip, json=params)
+    r = requests.post(node_ip, json=params, timeout=60)
     return r
 
 
