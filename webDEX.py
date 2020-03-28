@@ -5,7 +5,7 @@ import concurrent.futures
 
 # this function retrieves the actual coin prices from the oracle (coinpaprika.com) synchronically (standard)
 # for async price fetching you need some proxy ips as the coinpaprika api doesn't allow many parallel requests from one ip
-def fetch_prices(urls, async):
+def fetch_prices(urls, asynchronous):
     out = []
     CONNECTIONS = len(urls)
     TIMEOUT = 15
@@ -17,7 +17,7 @@ def fetch_prices(urls, async):
         ans = requests.get(url, timeout=timeout, proxies=proxies)
         return ans
 
-    if async:
+    if asynchronous:
         with concurrent.futures.ThreadPoolExecutor(max_workers=CONNECTIONS) as executor:
             future_to_url = (executor.submit(load_url, url, TIMEOUT) for url in urls)
             time1 = time.time()
