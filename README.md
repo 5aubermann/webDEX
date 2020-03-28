@@ -13,7 +13,7 @@ Python 3.6+
 
 #### Dependencies
 ```
-python3 -m pip install requests json subprocess python-bitcoinlib flask
+python3 -m pip install requests python-bitcoinlib flask
 ```
 
 ### Downloads
