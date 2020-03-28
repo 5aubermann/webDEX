@@ -13,6 +13,10 @@ mm2log_path = os.path.dirname(os.path.abspath(__file__)) + "/logs"
 
 with open(mm2_path+"/MM2.json") as j:
     mm2json = json.load(j)
+    
+if mm2json['passphrase'] == "":
+    print("Please edit 'MM2.json' with your passphrase (seed).")
+    exit()
 
 user_pass = mm2json['rpc_password']
 node_ip = "http://127.0.0.1:7783"
