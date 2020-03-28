@@ -27,7 +27,7 @@ https://komodoplatform.com/atomic-swaps/
 ## Setup  
 
 ### MM2.json
-This file needs to be edited with your own wallet passphrase (seed).
+This file needs to be edited with your own wallet passphrase (seed) and any rpc_password.
 
 See MM2_example.json example.
 ```
@@ -35,7 +35,7 @@ See MM2_example.json example.
 "gui":"MM2GUI",
 "netid":9999,
 "rpc_password":"ENTER SECURE RPC PASSWORD",
-"passphrase":"ENTER A SECURE PASSPHRASE"
+"passphrase":"ENTER SECURE PASSPHRASE"
 }
 ```
 
