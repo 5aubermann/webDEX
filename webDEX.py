@@ -199,11 +199,23 @@ def get_orderbook():
                     base_ask.append(base_rel_ask[i][:j])
                     for k in range(len(coinsjson)):
                         if coinsjson[k]['coin'] == base_rel_ask[i][:j]:
-                            base_ask_name.append(coinsjson[k]['fname'].replace(" ", "-").replace("Verus", "Verus-").replace("Raven", "Ravencoin").replace("Multi-collateral-", "").replace("Paxos", "Paxos-Standard-Token").replace("Chips", "Poker"))
+                            base_ask_name.append(coinsjson[k]['fname'].replace(" ", "-")
+                                                 .replace("Verus", "Verus-")
+                                                 .replace("Raven", "Ravencoin")
+                                                 .replace("Multi-collateral-", "")
+                                                 .replace("Paxos", "Paxos-Standard-Token")
+                                                 .replace("Chips", "Pangea")
+                                                 .replace("ChainZilla", "Zilla"))
                     rel_ask.append(base_rel_ask[i][j + 1:])
                     for k in range(len(coinsjson)):
                         if coinsjson[k]['coin'] == base_rel_ask[i][j+1:]:
-                            rel_ask_name.append(coinsjson[k]['fname'].replace(" ", "-").replace("Verus", "Verus-").replace("Raven", "Ravencoin").replace("Multi-collateral-", "").replace("Paxos", "Paxos-Standard-Token").replace("Chips", "Poker"))
+                            rel_ask_name.append(coinsjson[k]['fname'].replace(" ", "-")
+                                                .replace("Verus", "Verus-")
+                                                .replace("Raven", "Ravencoin")
+                                                .replace("Multi-collateral-", "")
+                                                .replace("Paxos", "Paxos-Standard-Token")
+                                                .replace("Chips", "Pangea")
+                                                .replace("ChainZilla", "Zilla"))
 
     for i in range(len(base_ask)):
         if "https://api.coinpaprika.com/v1/tickers/" + base_ask[i] + "-" + base_ask_name[i] not in urls:
