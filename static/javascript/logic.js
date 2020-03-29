@@ -19,8 +19,8 @@ function getName(obj) {
     const i = obj.className;
     document.getElementById('base').value = $(obj).parents().parents().find('#0'+i).attr('name');
     document.getElementById('rel').value = $(obj).parents().parents().find('#1'+i).attr('name');
-    document.getElementById('relPrice').value = $(obj).find('td:eq(7)').text();
-    document.getElementById('basePrice').value = $(obj).find('td:eq(9)').text();
+    document.getElementById('relPrice').value = $(obj).find('td:eq(9)').text();
+    document.getElementById('basePrice').value = $(obj).find('td:eq(7)').text();
     document.getElementById('baseAmount').value = $(obj).parents().parents().find('#4'+i).attr('name');
     document.getElementById('relAmount').value = $(obj).parents().parents().find('#5'+i).attr('name');
 }
