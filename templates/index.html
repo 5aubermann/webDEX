@@ -23,9 +23,9 @@
     <th align="right"><h4>Amount </h4></th>
     <th align="left"><h4>(Bid)</h4></th>
     <th align="right"><h4>Price </h4></th>
-    <th align="left"><h4>(Rel)</h4></th>
-    <th align="right"><h4>Price </h4></th>
     <th align="left"><h4>(Base)</h4></th>
+    <th align="right"><h4>Price </h4></th>
+    <th align="left"><h4>(Rel)</h4></th>
     <th align="right"><h4>Oracle Price </h4></th>
     <th align="left"><h4>(Rel)</h4></th>
   </tr>
@@ -38,10 +38,10 @@
     <td align="left">&nbsp;{{base_ask[i]}}</td>
     <td align="right" id="5{{ i }}" name="{{"%0.8f" % (ask_prices[i] * ask_volume[i])}}">{{"%0.8f" % (ask_prices[i] * ask_volume[i])}}</td>
     <td align="left">&nbsp;{{rel_ask[i]}}</td>
-    <td align="right" id="2{{ i }}" name="{{base_ask_name[i]}}">{{"%0.8f" % ask_prices[i]}}</td>
-    <td align="left">&nbsp;{{rel_ask[i]}}</td>
     <td align="right" id="3{{ i }}" name="{{rel_ask_name[i]}}">{{"%0.8f" % rez_ask_prices[i]}}</td>
     <td align="left">&nbsp;{{base_ask[i]}}</td>
+    <td align="right" id="2{{ i }}" name="{{base_ask_name[i]}}">{{"%0.8f" % ask_prices[i]}}</td>
+    <td align="left">&nbsp;{{rel_ask[i]}}</td>
     <td align="right" id="{{(-i)-1}}">{% if ratio_prices[i] != "" %}{{"%0.8f" % ratio_prices[i]}}{% endif %}</td>
     <td align="right">{% if ratio_prices[i] != "" %}&nbsp;{{"%0.2f" % ((ask_prices[i] / ratio_prices[i] - 1) * 100)}} %{% endif %}</td>
   </tr>
