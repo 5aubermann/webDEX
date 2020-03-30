@@ -2,11 +2,10 @@
 $(document).ready(function() {
     $('#table tr').bind("mouseover", function() {
         const color  = $(this).contents('td').css("background-color");
-        //alert(color);
         if (color === "rgb(204, 255, 204)") {
             $(this).contents('td').css("background", "rgb(176, 226, 176)");
         } else {
-            $(this).contents('td').css("background", "#ffd1d1"); // "#ffd1d1" "rgb(255, 255, 153)"
+            $(this).contents('td').css("background", "rgba(0, 0, 0, 0.175)");
         }
         $(this).bind("mouseout", function() {
             $(this).contents('td').css("background", color);
