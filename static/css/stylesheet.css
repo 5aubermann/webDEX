@@ -39,6 +39,7 @@ body {
   display: inline-block;
 }
 .dropdown-content {
+  cursor: pointer;
   display: none;
   position: absolute;
   background-color: #f1f1f1;
