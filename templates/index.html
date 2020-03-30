@@ -9,6 +9,19 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css') }}">
 
 <input id="search" type="search" size="13" placeholder="Search ...">
+  
+<div class="dropdown">
+  <button class="dropbtn">webDEX</button>
+  <div class="dropdown-content">
+    <a href="/my-addresses">Addresses</a>
+    <a href="/my-balances">Balances</a>
+    <a href="/cancel-all-orders">Cancel all Orders</a>
+    <a href="/cancel-order">Cancel UUID</a>
+    <a href="/my-open-orders">Open Orders</a>
+    <a href="/my-recent-swaps">Recent Swaps</a>
+  </div>
+</div>
+  
 <!-- <h2 align="center">Orderbook</h2> -->
 <table id="table" align="center" cellspacing=0>
   <tr id="headline">
