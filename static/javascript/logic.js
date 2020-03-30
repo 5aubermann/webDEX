@@ -25,6 +25,13 @@ function getName(obj) {
     document.getElementById('relAmount').value = $(obj).parents().parents().find('#5'+i).attr('name');
 }
 
+// confirm before cancel all orders
+function cancelAll() {
+    if (confirm("Cancel all open orders?")) {
+        window.open("/cancel-all-orders");
+    }
+}
+
 // price calculation
 $('#relAmount').keyup(function() {
     const relAmount = Number($('#relAmount').val());
