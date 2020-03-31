@@ -167,6 +167,7 @@ def get_orderbook():
     ratio_prices = []
     rez_ask_prices = []
     ask_volume = []
+    bid_volume = []
     urls = []
 
     while len(orderbook_json[0]) < 16:
@@ -177,20 +178,22 @@ def get_orderbook():
         activate_all()
         orderbook_json = get_orders_json()
 
-    for i in range(len(orderbook_json[0])):
+    for i in range(len(orderbook_json)):
         try:
             j = i
-            while orderbook_json[0][i]['pair'] == base_rel_ask[j-1] and float(orderbook_json[0][i]['price']) < ask_prices[j-1]:
+            while orderbook_json[i]['pair'] == base_rel_ask[j-1] and float(orderbook_json[i]['price']) < ask_prices[j-1]:
                 j -= 1
-            base_rel_ask.insert(j, orderbook_json[0][i]['pair'])
-            ask_prices.insert(j, float(orderbook_json[0][i]['price']))
-            rez_ask_prices.insert(j, 1 / float(orderbook_json[0][i]['price']))
-            ask_volume.insert(j, float(orderbook_json[0][i]['volume']))
+            base_rel_ask.insert(j, orderbook_json[i]['pair'])
+            ask_prices.insert(j, float(orderbook_json[i]['price']))
+            rez_ask_prices.insert(j, 1 / float(orderbook_json[i]['price']))
+            ask_volume.insert(j, float(orderbook_json[i]['volume']))
+            bid_volume.insert(j, int(float(orderbook_json[i]['volume']) * float(orderbook_json[i]['price']) * 100000000) / 100000000)
         except IndexError:
-            base_rel_ask.append(orderbook_json[0][i]['pair'])
-            ask_prices.append(float(orderbook_json[0][i]['price']))
-            rez_ask_prices.append(1 / float(orderbook_json[0][i]['price']))
-            ask_volume.append(float(orderbook_json[0][i]['volume']))
+            base_rel_ask.append(orderbook_json[i]['pair'])
+            ask_prices.append(float(orderbook_json[i]['price']))
+            rez_ask_prices.append(1 / float(orderbook_json[i]['price']))
+            ask_volume.append(float(orderbook_json[i]['volume']))
+            bid_volume.append(int(float(orderbook_json[i]['volume']) * float(orderbook_json[i]['price']) * 100000000) / 100000000)
 
     for i in range(len(base_rel_ask)):
         if base_rel_ask[i].find("/"):
@@ -310,7 +313,11 @@ def get_orderbook():
         except Exception:
             ratio_prices.append("")
 
-    app.jinja_env.globals.update(get_orderbook=get_orderbook, base_rel_ask=base_rel_ask, base_ask=base_ask, base_ask_name=base_ask_name, rel_ask=rel_ask, rel_ask_name=rel_ask_name, ask_volume=ask_volume, ask_prices=ask_prices, rez_ask_prices=rez_ask_prices, base_usd_prices=base_usd_prices, rel_usd_prices=rel_usd_prices, ratio_prices=ratio_prices)
+    app.jinja_env.globals.update(get_orderbook=get_orderbook, base_rel_ask=base_rel_ask, base_ask=base_ask,
+                                 base_ask_name=base_ask_name, rel_ask=rel_ask, rel_ask_name=rel_ask_name,
+                                 ask_volume=ask_volume, bid_volume=bid_volume, ask_prices=ask_prices,
+                                 rez_ask_prices=rez_ask_prices, base_usd_prices=base_usd_prices,
+                                 rel_usd_prices=rel_usd_prices, ratio_prices=ratio_prices)
     return ""
 
 
