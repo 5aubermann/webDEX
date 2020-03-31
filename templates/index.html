@@ -47,7 +47,7 @@
         <td align="left" id="1{{ i }}" name="{{rel_ask[i]}}" class="{{rel_usd_prices[i]}}" onclick="javascript:mark(this)">{{rel_ask[i]}}<span style="font-size:70%">{% if rel_usd_prices[i] != None %} ${{"%0.2f" % rel_usd_prices[i]}}{% endif %}</span></td>
         <td align="right" id="4{{ i }}" name="{{"%0.8f" % ask_volume[i]}}">{{"%0.8f" % ask_volume[i]}}</td>
         <td align="left">&nbsp;{{base_ask[i]}}</td>
-        <td align="right" id="5{{ i }}" name="{{"%0.8f" % (ask_prices[i] * ask_volume[i])}}">{{"%0.8f" % (ask_prices[i] * ask_volume[i])}}</td>
+        <td align="right" id="5{{ i }}" name="{{"%0.8f" % bid_volume[i]}}">{{"%0.8f" % bid_volume[i]}}</td>
         <td align="left">&nbsp;{{rel_ask[i]}}</td>
         <td align="right" id="3{{ i }}" name="{{rel_ask_name[i]}}">{{"%0.8f" % rez_ask_prices[i]}}</td>
         <td align="left">&nbsp;{{base_ask[i]}}</td>
