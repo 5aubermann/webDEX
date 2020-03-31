@@ -96,7 +96,6 @@ def orderbook(node_ip=node_ip, user_pass=user_pass, base="KMD", rel="BTC"):
 def get_orders_json(node_ip=node_ip, user_pass=user_pass, coins=coinslib.coins):
     orders = []
     ask_json = []
-    bid_json = []
     for base in coins:
         for rel in coins:
             if base != rel:
@@ -105,13 +104,12 @@ def get_orders_json(node_ip=node_ip, user_pass=user_pass, coins=coinslib.coins):
     for pair in orders:
         if 'asks' in pair:
             if len(pair['asks']) > 0:
-                baserel = pair['rel']+"/"+pair['base']
                 for ask in pair['asks']:
-                    baserel = pair['base']+"/"+pair['rel']
-                    ask_json.append({"pair": baserel, "price": str("%0.12f" % float(ask['price']))[:12], "volume": str("%0.12f" % float(ask['maxvolume']))[:12]})
-                for bid in pair['bids']:
-                    bid_json.append({"baserel": baserel, "price": str("%0.12f" % float(bid['price']))[:12], "volume": str("%0.12f" % float(bid['maxvolume']))[:12]})
-    return ask_json, bid_json
+                    baserel = pair['base'] + "/" + pair['rel']
+                    ask_json.append({"pair": baserel,
+                                     "price": ask['price'],
+                                     "volume": ask['maxvolume']})
+    return ask_json
 
 def my_balance(cointag, node_ip=node_ip, user_pass=user_pass):
     params = {'userpass': user_pass,
