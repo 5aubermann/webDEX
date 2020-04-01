@@ -36,7 +36,7 @@ This file needs to be edited with your own wallet passphrase (seed) and any rpc_
 See MM2_example.json example.
 ```
 {
-"gui":"MM2GUI",
+"gui":"webDEX",
 "netid":9999,
 "rpc_password":"ENTER SECURE RPC PASSWORD",
 "passphrase":"ENTER SECURE PASSPHRASE"
