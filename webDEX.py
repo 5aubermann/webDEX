@@ -1,27 +1,22 @@
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, render_template, request, jsonify
 from mm2_calls import *
-import random
 import concurrent.futures
 
-# this function retrieves the actual coin prices from the oracle (coinpaprika.com) synchronically (standard)
-# for async price fetching you need some proxy ips as the coinpaprika api doesn't allow many parallel requests from one ip
-
+# this function retrieves the actual coin prices from the oracle (coinpaprika.com) asynchronically (standard)
 def fetch_prices(urls, asynchronous):
     out = []
-    CONNECTIONS = len(urls)
-    TIMEOUT = 15
+    CONNECTIONS = 6
+    TIMEOUT = 10
 
     def load_url(url, timeout):
-        proxies = {
-        }
         print(url)
-        ans = requests.get(url, timeout=timeout, proxies=proxies)
+        ans = requests.get(url, timeout=timeout)
         return ans
 
     if asynchronous:
         with concurrent.futures.ThreadPoolExecutor(max_workers=CONNECTIONS) as executor:
             future_to_url = (executor.submit(load_url, url, TIMEOUT) for url in urls)
-            time1 = time.time()
+           # time1 = time.time()
             for future in concurrent.futures.as_completed(future_to_url):
                 try:
                     data = future.result()
@@ -36,7 +31,7 @@ def fetch_prices(urls, asynchronous):
                     except Exception:
                         out.append(json.loads('{"error": "bad url"}'))
 
-            time2 = time.time()
+           # time2 = time.time()
 
        # print(f'Took {time2 - time1:.2f} s')
         for i in range(len(out) - 1, -1, -1):
@@ -227,7 +222,7 @@ def get_orderbook():
         if "https://api.coinpaprika.com/v1/tickers/" + rel_ask[i] + "-" + rel_ask_name[i] not in urls:
             urls.append("https://api.coinpaprika.com/v1/tickers/" + rel_ask[i] + "-" + rel_ask_name[i])
 
-    data = fetch_prices(urls, False)
+    data = fetch_prices(urls, True)
 
     # get_kmd_price
     kmd_price = None
