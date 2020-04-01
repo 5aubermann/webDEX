@@ -67,6 +67,7 @@ def html_frame(head, body):
     return """<!DOCTYPE html>
                <html>
                <head>
+               <link rel="shortcut icon" href="/static/icon.png">
                {}
                </head>
                <body>
