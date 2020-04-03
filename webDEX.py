@@ -26,8 +26,8 @@ def fetch_prices(urls, asynchronous):
                     try:
                         out.append(json.loads(data.text))
                     except AttributeError:
-                        out.append(json.loads('{"error": "proxy timeout"}'))
-                        print(str(json.loads('{"error": "proxy timeout"}')))
+                        out.append(json.loads('{"error": "api timeout"}'))
+                        print(str(json.loads('{"error": "api timeout"}')))
                     except Exception:
                         out.append(json.loads('{"error": "bad url"}'))
 
