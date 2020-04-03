@@ -16,13 +16,19 @@ body {
 }
 #table td {
    cursor: pointer;
-   font-size: 14px;
+   font-size: 15px;
 }
 #search {
   position: fixed;
   top: 0;
   right: 0;
   background-color: rgb(255, 255, 230);
+}
+#headline {
+  background: #3c6363;
+  color: white;
+  position: sticky;
+  top: 0;
 }
 
 .dropbtn {
