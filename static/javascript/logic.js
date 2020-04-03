@@ -56,15 +56,12 @@ $('#basePrice').keyup(function() {
     document.getElementById('baseAmount').value = (basePrice * relAmount).toFixed(8);
 });
 
-// search
-const colomns = $("#table").find("tr:first th").length;
-let arrOfTable = []
-$('#table td').each(function() {
-    arrOfTable.push($(this).width());
-    if (arrOfTable.length === colomns) {
-        return false;
-    }
+// fix table width
+$('#table th').each(function() {
+    $(this).css("min-width", $(this).width() + "px");
 });
+
+// search
 let search = $('#search').val().toUpperCase();
 let arrSearch = [];
 let i = 0;
@@ -89,14 +86,6 @@ if ($('#search').val() !== "") {
     if (arrSearch.length === 0) {
         $('td', '#table').closest('tr').show();
     }
-    i = 0;
-    $('#table th').each(function() {
-        $(this).css("min-width", arrOfTable[i] + "px");
-        i++;
-        if (i === colomns + 1) {
-            return false;
-        }
-    });
 }
 
 $('#search').keyup(function() {
@@ -123,14 +112,6 @@ $('#search').keyup(function() {
     if (arrSearch.length === 0) {
         $('td', '#table').closest('tr').show();
     }
-    i = 0;
-    $('#table th').each(function() {
-        $(this).css("min-width", arrOfTable[i] + "px");
-        i++;
-        if (i === colomns + 1) {
-            return false;
-        }
-    });
 });
 
 // highlight cheaper orders
@@ -163,10 +144,6 @@ addEvent(document, 'keyup', function(e) {
                     $('#2'+i).closest('tr').show();
                 }
             }
-            $('#table td').each(function() {
-                $(this).css("min-width", arrOfTable[i] + "px");
-                i++; 
-            });
             showAll = false;
         } else {
             $('td', '#table').closest('tr').show();
