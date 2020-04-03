@@ -57,9 +57,13 @@ $('#basePrice').keyup(function() {
 });
 
 // search
+const colomns = $("#table").find("tr:first th").length;
 let arrOfTable = []
 $('#table td').each(function() {
     arrOfTable.push($(this).width());
+    if (arrOfTable.length === colomns) {
+        return false;
+    }
 });
 let search = $('#search').val().toUpperCase();
 let arrSearch = [];
@@ -86,9 +90,12 @@ if ($('#search').val() !== "") {
         $('td', '#table').closest('tr').show();
     }
     i = 0;
-    $('#table td').each(function() {
+    $('#table th').each(function() {
         $(this).css("min-width", arrOfTable[i] + "px");
-        i++; 
+        i++;
+        if (i === colomns + 1) {
+            return false;
+        }
     });
 }
 
@@ -117,9 +124,12 @@ $('#search').keyup(function() {
         $('td', '#table').closest('tr').show();
     }
     i = 0;
-    $('#table td').each(function() {
+    $('#table th').each(function() {
         $(this).css("min-width", arrOfTable[i] + "px");
-        i++; 
+        i++;
+        if (i === colomns + 1) {
+            return false;
+        }
     });
 });
 
