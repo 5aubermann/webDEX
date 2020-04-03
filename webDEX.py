@@ -183,14 +183,14 @@ def get_orderbook():
             base_rel_ask.insert(j, orderbook_json[i]['pair'])
             ask_prices.insert(j, float(orderbook_json[i]['price']))
             rez_ask_prices.insert(j, 1 / float(orderbook_json[i]['price']))
-            ask_volume.insert(j, float(orderbook_json[i]['volume']))
-            bid_volume.insert(j, int(float(orderbook_json[i]['volume']) * float(orderbook_json[i]['price']) * 100000000) / 100000000)
+            ask_volume.insert(j, int(float(orderbook_json[i]['volume']) * 100000000) / 100000000)
+            bid_volume.insert(j, float(orderbook_json[i]['volume']) * float(orderbook_json[i]['price']))
         except IndexError:
             base_rel_ask.append(orderbook_json[i]['pair'])
             ask_prices.append(float(orderbook_json[i]['price']))
             rez_ask_prices.append(1 / float(orderbook_json[i]['price']))
-            ask_volume.append(float(orderbook_json[i]['volume']))
-            bid_volume.append(int(float(orderbook_json[i]['volume']) * float(orderbook_json[i]['price']) * 100000000) / 100000000)
+            ask_volume.append(int(float(orderbook_json[i]['volume']) * 100000000) / 100000000)
+            bid_volume.append(float(orderbook_json[i]['volume']) * float(orderbook_json[i]['price']))
 
     for i in range(len(base_rel_ask)):
         if base_rel_ask[i].find("/"):
