@@ -24,7 +24,8 @@ def fetch_prices(urls, asynchronous):
         print(url)
         ans = requests.get(url, timeout=timeout)
         return ans
-
+    
+    dexstats = None
     if asynchronous:
         with concurrent.futures.ThreadPoolExecutor(max_workers=CONNECTIONS) as executor:
             future_to_url = (executor.submit(load_url, url, TIMEOUT) for url in urls)
@@ -60,7 +61,7 @@ def fetch_prices(urls, asynchronous):
 
         for url in urls:
             out.append(json.loads('{"symbol": "' + url.split("/")[-1].split("-")[0].upper() + '"}'))
-        return out
+        return out, dexstats
 
     time1 = time.time()
     for url in urls:
