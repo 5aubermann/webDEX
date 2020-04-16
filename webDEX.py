@@ -37,7 +37,7 @@ def fetch_prices(urls, asynchronous):
                     data = str(type(exc))
                 finally:
                     try:
-                        if str(data) == "<Response [500]>":
+                        if data.text[:7] == "<table>":
                             dexstats = data.text
                         else:
                             out.append(json.loads(data.text))
@@ -75,7 +75,7 @@ def fetch_prices(urls, asynchronous):
         except Exception:
             symbol = url.split("/")[-1].split("-")[0].upper()
             out.append(json.loads('{"symbol": "' + symbol + '"}'))
-    time2 = time.time()
+   # time2 = time.time()
    # print(f'Took {time2 - time1:.2f} s')
     return out
 
