@@ -347,7 +347,7 @@ def get_orderbook():
                     elif base_ask[i] == "SUPERNET":
                         base_usd_prices.append(30 * kmd_price)
                     elif base_ask[i] == "CHIPS":
-                        base_usd_prices.append(0.11 * kmd_price)
+                        base_usd_prices.append(chips_price * kmd_price)
                     elif base_ask[i] == "REVS":
                         base_usd_prices.append(revs_price * kmd_price)
                     elif base_ask[i] == "RFOX":
@@ -393,7 +393,7 @@ def get_orderbook():
                     elif rel_ask[i] == "SUPERNET":
                         rel_usd_prices.append(30 * kmd_price)
                     elif rel_ask[i] == "CHIPS":
-                        rel_usd_prices.append(0.11 * kmd_price)
+                        rel_usd_prices.append(chips_price * kmd_price)
                     elif rel_ask[i] == "REVS":
                         rel_usd_prices.append(revs_price * kmd_price)
                     elif rel_ask[i] == "RFOX":
