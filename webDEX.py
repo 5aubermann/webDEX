@@ -1,6 +1,18 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
+from bs4 import BeautifulSoup
 from mm2_calls import *
 import concurrent.futures
+
+price_prev = {'BET/KMD': None,
+              'BOTS/KMD': None,
+              'CHIPS/KMD': None,
+              'COQUI/KMD': None,
+              'CRYPTO/KMD': None,
+              'DEX/KMD': None,
+              'HODL/KMD': None,
+              'LABS/KMD': None,
+              'REVS/KMD': None,
+              'RFOX/KMD': None}
 
 # this function retrieves the actual coin prices from the oracle (coinpaprika.com) asynchronically (standard)
 def fetch_prices(urls, asynchronous):
@@ -24,7 +36,10 @@ def fetch_prices(urls, asynchronous):
                     data = str(type(exc))
                 finally:
                     try:
-                        out.append(json.loads(data.text))
+                        if str(data) == "<Response [500]>":
+                            dexstats = data.text
+                        else:
+                            out.append(json.loads(data.text))
                     except AttributeError:
                         out.append(json.loads('{"error": "api timeout"}'))
                         print(str(json.loads('{"error": "api timeout"}')))
@@ -62,6 +77,27 @@ def fetch_prices(urls, asynchronous):
     time2 = time.time()
    # print(f'Took {time2 - time1:.2f} s')
     return out
+
+def get_assetchain_prices(rows, pair1, pair2, price_prev):
+    price = None
+    volume = 0
+    volume_price = 0
+    for row in rows:
+        cells = row.find_all('td')
+        if cells[1].get_text() == pair1 or cells[1].get_text() == pair2:
+            if cells[1].get_text() == pair1:
+                volume += float(cells[2].get_text())
+                volume_price += float(cells[2].get_text()) * float(cells[4].get_text())
+            if cells[1].get_text() == pair2:
+                volume += float(cells[3].get_text())
+                volume_price += float(cells[3].get_text()) * (1 / float(cells[4].get_text()))
+            try:
+                price = volume_price / volume
+                price_prev = price
+            except ZeroDivisionError:
+                price = price_prev
+    return price, price_prev
+
 
 def html_frame(head, body):
     return """<!DOCTYPE html>
@@ -104,7 +140,7 @@ def cancel_order():
 @app.route('/cancelled-order', methods=['POST'])
 def cancelled_order():
     head = """<title>Cancelled Order</title>
-              <meta http-equiv="refresh" content="2; URL=../my-open-orders" />"""
+              <meta http-equiv="refresh" content="4; URL=../my-open-orders" />"""
     body = cancel_uuid(request.form.get('uuid')).text
     return html_frame(head, body)
 
@@ -143,6 +179,30 @@ def open_orders():
     orders = my_orders()
     return jsonify(json.loads(orders.text))
 
+@app.route('/webdex/withdraw')
+def withdraw():
+    head = "<title>Withdraw</title>"
+    body = """<form action="/webdex/withdrawal" method="post">
+              <input type="text" id="cointag" name="cointag" placeholder="Cointag">
+              <input type="text" id="address" name="address" placeholder="Address">
+              <input type="submit" value="Withdraw all">
+              </form>"""
+    return html_frame(head, body)
+
+@app.route('/webdex/withdrawal', methods=['POST'])
+def withdrawal():
+    try:
+        cointag = request.form.get('cointag').upper()
+        address = request.form.get('address')
+        tx_hex = withdraw_all(cointag, address).text
+        try:
+            send_raw_transaction(cointag, json.loads(tx_hex)['tx_hex'])
+            return jsonify(json.loads(tx_hex))
+        except KeyError:
+            return jsonify(json.loads(tx_hex))
+    except Exception as e:
+        return str(e)
+
 @app.route('/orderbook')
 def index():
     get_orderbook()
@@ -166,7 +226,8 @@ def get_orderbook():
     ask_volume = []
     bid_volume = []
     urls = []
-
+    
+    """
     while len(orderbook_json) < 16:
         stop_mm2()
         time.sleep(5)
@@ -174,7 +235,8 @@ def get_orderbook():
         time.sleep(8)
         activate_all()
         orderbook_json = get_orders_json()
-
+        """
+    
     for i in range(len(orderbook_json)):
         try:
             j = i
@@ -222,10 +284,37 @@ def get_orderbook():
             urls.append("https://api.coinpaprika.com/v1/tickers/" + base_ask[i] + "-" + base_ask_name[i])
         if "https://api.coinpaprika.com/v1/tickers/" + rel_ask[i] + "-" + rel_ask_name[i] not in urls:
             urls.append("https://api.coinpaprika.com/v1/tickers/" + rel_ask[i] + "-" + rel_ask_name[i])
+    urls.append('https://dexstats.info/tradevolume.php')
+    
+    data, r = fetch_prices(urls, True)
 
-    data = fetch_prices(urls, True)
+    # assetchain_prices
+    try:
+        soup = BeautifulSoup(r, 'html.parser')
+        rows = soup.find_all('tr')
+        bet_price, price_prev['BET/KMD'] = get_assetchain_prices(rows, "BET/KMD", "KMD/BET", price_prev['BET/KMD'])
+        bots_price, price_prev['BOTS/KMD'] = get_assetchain_prices(rows, "BOTS/KMD", "KMD/BOTS", price_prev['BOTS/KMD'])
+        chips_price, price_prev['CHIPS/KMD'] = get_assetchain_prices(rows, "CHIPS/KMD", "KMD/CHIPS", price_prev['CHIPS/KMD'])
+        coqui_price, price_prev['COQUI/KMD'] = get_assetchain_prices(rows, "COQUI/KMD", "KMD/COQUI", price_prev['COQUI/KMD'])
+        crypto_price, price_prev['CRYPTO/KMD'] = get_assetchain_prices(rows, "CRYPTO/KMD", "KMD/CRYPTO", price_prev['CRYPTO/KMD'])
+        dex_price, price_prev['DEX/KMD'] = get_assetchain_prices(rows, "DEX/KMD", "KMD/DEX", price_prev['DEX/KMD'])
+        hodl_price, price_prev['HODL/KMD'] = get_assetchain_prices(rows, "HODL/KMD", "KMD/HODL", price_prev['HODL/KMD'])
+        labs_price, price_prev['LABS/KMD'] = get_assetchain_prices(rows, "LABS/KMD", "KMD/LABS", price_prev['LABS/KMD'])
+        revs_price, price_prev['REVS/KMD'] = get_assetchain_prices(rows, "REVS,KMD", "KMD/REVS", price_prev['REVS/KMD'])
+        rfox_price, price_prev['RFOX/KMD'] = get_assetchain_prices(rows, "RFOX,KMD", "KMD/RFOX", price_prev['RFOX/KMD'])
+    except TypeError:
+        bet_price = None
+        bots_price = None
+        chips_price = None
+        coqui_price = None
+        crypto_price = None
+        dex_price = None
+        hodl_price = None
+        labs_price = None
+        revs_price = None
+        rfox_price = None
 
-    # get_kmd_price
+    # kmd_price
     kmd_price = None
     for i in range(len(base_ask)):
         for j in range(len(data)):
@@ -236,8 +325,7 @@ def get_orderbook():
                         break
             except KeyError:
                 continue
-    
-    # appending oracle (coinpaprika) coin prices
+
     for i in range(len(base_ask)):
         for j in range(len(data)):
             try:
@@ -245,7 +333,6 @@ def get_orderbook():
                     base_usd_prices.append(float(data[j]['quotes']['USD']['price']))
                     break
             except KeyError:
-                # SAI price is not availible at coinpaprika so getting its price from coingecko (base side)
                 if base_ask[i] == "SAI":
                     data = requests.get("https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359&vs_currencies=usd", timeout=5).text
                     data = json.loads(data)
@@ -254,16 +341,29 @@ def get_orderbook():
                     except KeyError:
                         sai_price = 1
                     base_usd_prices.append(sai_price)
-                # some coin prices are chosen manually as a factor of KMD price (base side)
                 try:
                     if base_ask[i] == "DEX":
-                        base_usd_prices.append(17.5 * kmd_price)
+                        base_usd_prices.append(dex_price * kmd_price)
                     elif base_ask[i] == "SUPERNET":
                         base_usd_prices.append(30 * kmd_price)
                     elif base_ask[i] == "CHIPS":
                         base_usd_prices.append(0.11 * kmd_price)
                     elif base_ask[i] == "REVS":
-                        base_usd_prices.append(2 * kmd_price)
+                        base_usd_prices.append(revs_price * kmd_price)
+                    elif base_ask[i] == "RFOX":
+                        base_usd_prices.append(rfox_price * kmd_price)
+                    elif base_ask[i] == "BOTS":
+                        base_usd_prices.append(bots_price * kmd_price)
+                    elif base_ask[i] == "BET":
+                        base_usd_prices.append(bet_price * kmd_price)
+                    elif base_ask[i] == "HODL":
+                        base_usd_prices.append(hodl_price * kmd_price)
+                    elif base_ask[i] == "LABS":
+                        base_usd_prices.append(labs_price * kmd_price)
+                    elif base_ask[i] == "COQUI":
+                        base_usd_prices.append(coqui_price * kmd_price)
+                    elif base_ask[i] == "CRYPTO":
+                        base_usd_prices.append(crypto_price * kmd_price)
                     else:
                         base_usd_prices.append(None)
                 except TypeError:
@@ -276,7 +376,6 @@ def get_orderbook():
                     rel_usd_prices.append(float(data[j]['quotes']['USD']['price']))
                     break
             except KeyError:
-                # SAI price is not availible at coinpaprika so getting its price from coingecko (rel side)
                 if rel_ask[i] == "SAI":
                     try:
                         rel_usd_prices.append(sai_price)
@@ -288,16 +387,29 @@ def get_orderbook():
                         except KeyError:
                             sai_price = 1
                         base_usd_prices.append(sai_price)
-                # some coin prices are chosen manually as a factor of KMD price (rel side)
                 try:
                     if rel_ask[i] == "DEX":
-                        rel_usd_prices.append(17.5 * kmd_price)
+                        rel_usd_prices.append(dex_price * kmd_price)
                     elif rel_ask[i] == "SUPERNET":
                         rel_usd_prices.append(30 * kmd_price)
                     elif rel_ask[i] == "CHIPS":
                         rel_usd_prices.append(0.11 * kmd_price)
                     elif rel_ask[i] == "REVS":
-                        rel_usd_prices.append(2 * kmd_price)
+                        rel_usd_prices.append(revs_price * kmd_price)
+                    elif rel_ask[i] == "RFOX":
+                        rel_usd_prices.append(rfox_price * kmd_price)
+                    elif rel_ask[i] == "BOTS":
+                        rel_usd_prices.append(bots_price * kmd_price)
+                    elif rel_ask[i] == "BET":
+                        rel_usd_prices.append(bet_price * kmd_price)
+                    elif rel_ask[i] == "HODL":
+                        rel_usd_prices.append(hodl_price * kmd_price)
+                    elif rel_ask[i] == "LABS":
+                        rel_usd_prices.append(labs_price * kmd_price)
+                    elif rel_ask[i] == "COQUI":
+                        rel_usd_prices.append(coqui_price * kmd_price)
+                    elif rel_ask[i] == "CRYPTO":
+                        rel_usd_prices.append(crypto_price * kmd_price)
                     else:
                         rel_usd_prices.append(None)
                 except TypeError:
