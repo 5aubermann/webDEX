@@ -259,23 +259,31 @@ def get_orderbook():
         if base_rel_ask[i].find("/"):
             for j, w in enumerate(base_rel_ask[i]):
                 if w == "/":
-                    base_ask.append(base_rel_ask[i][:j])
+                    if base_rel_ask[i][:j] == "SAI":
+                        base_ask.append("DAI")
+                    else:
+                        base_ask.append(base_rel_ask[i][:j])
                     for k in range(len(coinsjson)):
                         if coinsjson[k]['coin'] == base_rel_ask[i][:j]:
                             base_ask_name.append(coinsjson[k]['fname'].replace(" ", "-")
                                                  .replace("Verus", "Verus-")
                                                  .replace("Raven", "Ravencoin")
                                                  .replace("Multi-collateral-", "")
+                                                 .replace("Single-Collateral-", "")
                                                  .replace("Paxos", "Paxos-Standard-Token")
                                                  .replace("Chips", "Pangea")
                                                  .replace("ChainZilla", "Zilla"))
-                    rel_ask.append(base_rel_ask[i][j + 1:])
+                    if base_rel_ask[i][j + 1:] == "SAI":
+                        rel_ask.append("DAI")
+                    else:
+                        rel_ask.append(base_rel_ask[i][j + 1:])
                     for k in range(len(coinsjson)):
                         if coinsjson[k]['coin'] == base_rel_ask[i][j+1:]:
                             rel_ask_name.append(coinsjson[k]['fname'].replace(" ", "-")
                                                 .replace("Verus", "Verus-")
                                                 .replace("Raven", "Ravencoin")
                                                 .replace("Multi-collateral-", "")
+                                                .replace("Single-Collateral-", "")
                                                 .replace("Paxos", "Paxos-Standard-Token")
                                                 .replace("Chips", "Pangea")
                                                 .replace("ChainZilla", "Zilla"))
@@ -334,14 +342,6 @@ def get_orderbook():
                     base_usd_prices.append(float(data[j]['quotes']['USD']['price']))
                     break
             except KeyError:
-                if base_ask[i] == "SAI":
-                    data = requests.get("https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359&vs_currencies=usd", timeout=5).text
-                    data = json.loads(data)
-                    try:
-                        sai_price = float(data['0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359']['usd'])
-                    except KeyError:
-                        sai_price = 1
-                    base_usd_prices.append(sai_price)
                 try:
                     if base_ask[i] == "DEX":
                         base_usd_prices.append(dex_price * kmd_price)
@@ -377,17 +377,6 @@ def get_orderbook():
                     rel_usd_prices.append(float(data[j]['quotes']['USD']['price']))
                     break
             except KeyError:
-                if rel_ask[i] == "SAI":
-                    try:
-                        rel_usd_prices.append(sai_price)
-                    except NameError:
-                        data = requests.get("https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359&vs_currencies=usd", timeout=5).text
-                        data = json.loads(data)
-                        try:
-                            sai_price = float(data['0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359']['usd'])
-                        except KeyError:
-                            sai_price = 1
-                        base_usd_prices.append(sai_price)
                 try:
                     if rel_ask[i] == "DEX":
                         rel_usd_prices.append(dex_price * kmd_price)
