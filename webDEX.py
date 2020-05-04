@@ -92,11 +92,11 @@ def get_assetchain_prices(rows, pair1, pair2, price_prev):
             if cells[1].get_text() == pair2:
                 volume += float(cells[3].get_text())
                 volume_price += float(cells[3].get_text()) * (1 / float(cells[4].get_text()))
-            try:
-                price = volume_price / volume
-                price_prev = price
-            except ZeroDivisionError:
-                price = price_prev
+        try:
+            price = volume_price / volume
+            price_prev = price
+        except ZeroDivisionError:
+            price = price_prev
     return price, price_prev
 
 
