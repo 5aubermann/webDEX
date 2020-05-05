@@ -19,7 +19,7 @@ python3 -m pip install requests python-bitcoinlib flask beautifulsoup4
 ### Downloads
 ```
 git clone https://github.com/5aubermann/webDEX
-cd webDEX && wget https://raw.githubusercontent.com/jl777/coins/master/coins && wget https://github.com/KomodoPlatform/atomicDEX-API/releases/download/beta-2.0.1848/mm2-7d10c66c0-Linux-Release.zip && unzip mm2-7d10c66c0-Linux-Release.zip && rm mm2-7d10c66c0-Linux-Release.zip
+cd webDEX && wget https://raw.githubusercontent.com/jl777/coins/master/coins && wget https://github.com/KomodoPlatform/atomicDEX-API/releases/download/beta-2.0.1904/mm2-0ef0212cb-Linux-Release.zip && unzip mm2-0ef0212cb-Linux-Release.zip && rm mm2-0ef0212cb-Linux-Release.zip
 ```
 
 #### Recommended reading  
