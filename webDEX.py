@@ -12,7 +12,9 @@ price_prev = {'BET/KMD': None,
               'HODL/KMD': None,
               'LABS/KMD': None,
               'REVS/KMD': None,
-              'RFOX/KMD': None}
+              'RFOX/KMD': None,
+              'SUPERNET/KMD': None,
+              'ZILLA/KMD': None}
 
 # this function retrieves the actual coin prices from the oracle (coinpaprika.com) asynchronically (standard)
 def fetch_prices(urls, asynchronous):
@@ -309,8 +311,10 @@ def get_orderbook():
         dex_price, price_prev['DEX/KMD'] = get_assetchain_prices(rows, "DEX/KMD", "KMD/DEX", price_prev['DEX/KMD'])
         hodl_price, price_prev['HODL/KMD'] = get_assetchain_prices(rows, "HODL/KMD", "KMD/HODL", price_prev['HODL/KMD'])
         labs_price, price_prev['LABS/KMD'] = get_assetchain_prices(rows, "LABS/KMD", "KMD/LABS", price_prev['LABS/KMD'])
-        revs_price, price_prev['REVS/KMD'] = get_assetchain_prices(rows, "REVS,KMD", "KMD/REVS", price_prev['REVS/KMD'])
-        rfox_price, price_prev['RFOX/KMD'] = get_assetchain_prices(rows, "RFOX,KMD", "KMD/RFOX", price_prev['RFOX/KMD'])
+        revs_price, price_prev['REVS/KMD'] = get_assetchain_prices(rows, "REVS/KMD", "KMD/REVS", price_prev['REVS/KMD'])
+        rfox_price, price_prev['RFOX/KMD'] = get_assetchain_prices(rows, "RFOX/KMD", "KMD/RFOX", price_prev['RFOX/KMD'])
+        supernet_price, price_prev['SUPERNET/KMD'] = get_assetchain_prices(rows, "SUPERNET/KMD", "KMD/SUPERNET", price_prev['SUPERNET/KMD'])
+        zilla_price, price_prev['ZILLA/KMD'] = get_assetchain_prices(rows, "ZILLA/KMD", "KMD/ZILLA", price_prev['ZILLA/KMD'])
     except TypeError:
         bet_price = None
         bots_price = None
@@ -322,6 +326,8 @@ def get_orderbook():
         labs_price = None
         revs_price = None
         rfox_price = None
+        supernet_price = None
+        zilla_price = None
 
     # kmd_price
     kmd_price = None
@@ -346,7 +352,7 @@ def get_orderbook():
                     if base_ask[i] == "DEX":
                         base_usd_prices.append(dex_price * kmd_price)
                     elif base_ask[i] == "SUPERNET":
-                        base_usd_prices.append(30 * kmd_price)
+                        base_usd_prices.append(supernet_price * kmd_price)
                     elif base_ask[i] == "CHIPS":
                         base_usd_prices.append(chips_price * kmd_price)
                     elif base_ask[i] == "REVS":
@@ -365,6 +371,8 @@ def get_orderbook():
                         base_usd_prices.append(coqui_price * kmd_price)
                     elif base_ask[i] == "CRYPTO":
                         base_usd_prices.append(crypto_price * kmd_price)
+                    elif base_ask[i] == "ZILLA":
+                        base_usd_prices.append(zilla_price * kmd_price)
                     else:
                         base_usd_prices.append(None)
                 except TypeError:
@@ -381,7 +389,7 @@ def get_orderbook():
                     if rel_ask[i] == "DEX":
                         rel_usd_prices.append(dex_price * kmd_price)
                     elif rel_ask[i] == "SUPERNET":
-                        rel_usd_prices.append(30 * kmd_price)
+                        rel_usd_prices.append(supernet_price * kmd_price)
                     elif rel_ask[i] == "CHIPS":
                         rel_usd_prices.append(chips_price * kmd_price)
                     elif rel_ask[i] == "REVS":
@@ -400,6 +408,8 @@ def get_orderbook():
                         rel_usd_prices.append(coqui_price * kmd_price)
                     elif rel_ask[i] == "CRYPTO":
                         rel_usd_prices.append(crypto_price * kmd_price)
+                    elif rel_ask[i] == "ZILLA":
+                        rel_usd_prices.append(zilla_price * kmd_price)
                     else:
                         rel_usd_prices.append(None)
                 except TypeError:
