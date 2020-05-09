@@ -1,6 +1,5 @@
 coins = {
     "AXE":{
-        "api-id": "axe",
         "activate_with":"electrum",
         "tx_explorer":"https://etherscan.io/tx",
         "electrum": [{"url":"electrum1.cipig.net:10057"},
@@ -50,7 +49,6 @@ coins = {
         }],
     },
     "BOTS":{
-        "api-id": "",
         "activate_with":"electrum",
         "tx_explorer":"https://bots.explorer.dexstats.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10007"},
@@ -58,7 +56,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10007"}],
     },
     "BTC":{
-        "api-id": "bitcoin",
         "activate_with":"electrum",
         "tx_explorer":"https://explorer.bitcoin.com/btc/tx",
         "electrum": [{"url":"electrum1.cipig.net:10000"},
@@ -66,7 +63,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10000"}],
     },
     "BTCH":{
-        "api-id": "bitcoin-hush",
         "activate_with":"electrum",
         "tx_explorer":"https://bots.explorer.dexstats.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10020"},
@@ -82,7 +78,6 @@ coins = {
         "contract": "0x8500AFc0bc5214728082163326C2FF0C73f4a871",
     },
     "CHIPS":{
-        "api-id": "",
         "activate_with":"electrum",
         "tx_explorer":"https://chips.explorer.dexstats.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10053"},
@@ -90,7 +85,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10053"}],
     },
     "COQUI":{
-        "api-id": "",
         "activate_with":"electrum",
         "tx_explorer":"https://coqui.explorer.dexstats.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10011"},
@@ -98,7 +92,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10011"}],
     },
     "CRYPTO":{
-        "api-id": "",
         "activate_with":"electrum",
         "tx_explorer":"https://crypto.explorer.dexstats.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10008"},
@@ -106,7 +99,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10008"}],
     },
     "DAI":{
-        "api-id": "dai",
         "activate_with":"electrum",
         "tx_explorer":"https://etherscan.io/tx",
         "electrum": ["http://eth1.cipig.net:8555",
@@ -115,7 +107,6 @@ coins = {
         "contract": "0x8500AFc0bc5214728082163326C2FF0C73f4a871",
     },
     "DASH":{
-        "api-id": "dash",
         "activate_with":"electrum",
         "tx_explorer":"https://explorer.dash.org/tx",
         "electrum":  [{"url":"electrum1.cipig.net:10061"},
@@ -123,7 +114,6 @@ coins = {
                       {"url":"electrum3.cipig.net:10061"}],
     },
     "DEX":{
-        "api-id": "",
         "activate_with":"electrum",
         "tx_explorer":"https://dex.explorer.dexstats.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10006"},
@@ -131,7 +121,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10006"}],
     },
     "DGB":{
-        "api-id": "digibyte",
         "activate_with":"electrum",
         "tx_explorer":"https://digiexplorer.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10059"},
@@ -139,7 +128,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10059"}],
     },
     "DOGE":{
-        "api-id": "dogecoin",
         "activate_with":"electrum",
         "tx_explorer":"https://live.blockcypher.com/doge/tx",
         "electrum": [{"url":"electrum1.cipig.net:10060"},
@@ -147,7 +135,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10060"}],
     },
     "EMC2":{
-        "api-id": "einsteinium",
         "activate_with":"electrum",
         "electrum": [{
             "url": "electrum3.cipig.net:10062",
@@ -160,7 +147,6 @@ coins = {
             }],
     },
     "ETH":{
-        "api-id": "ethereum",
         "activate_with":"electrum",
         "tx_explorer":"https://etherscan.io/tx",
         "electrum": ["http://eth1.cipig.net:8555",
@@ -169,7 +155,6 @@ coins = {
         "contract": "0x8500AFc0bc5214728082163326C2FF0C73f4a871",
     },
     "HODL":{
-        "api-id": "",
         "activate_with":"electrum",
         "electrum": [{
             "url": "electrum1.cipig.net:10009"
@@ -194,15 +179,30 @@ coins = {
         }],
     },
     "HUSH":{
-        "api-id": "hush",
         "activate_with":"electrum",
-        "tx_explorer":"https://hush3.komodod.com/t",
+        "tx_explorer":"https://hush3.komodod.com/",
         "electrum": [{"url":"electrum1.cipig.net:10064"},
                      {"url":"electrum2.cipig.net:10064"},
                      {"url":"electrum3.cipig.net:10064"}],
     },
+    "ILN":{
+        "activate_with":"electrum",
+        "electrum": [{"url":"electrum1.ilien.io:65011"},
+                     {"url":"electrum2.ilien.io:65011"}],
+    },
+    "JUMBLR":{
+        "activate_with":"electrum",
+        "electrum": [{"url": "electrum1.cipig.net:10004"},
+                     {"url": "electrum2.cipig.net:10004"},
+                     {"url": "electrum3.cipig.net:10004"},
+                     {"url": "electrum1.cipig.net:20004",
+                      "protocol": "SSL"},
+                     {"url": "electrum2.cipig.net:20004",
+                      "protocol": "SSL"},
+                     {"url": "electrum3.cipig.net:20004",
+                      "protocol": "SSL"}],
+    },
     "KMD":{
-        "api-id": "komodo",
         "activate_with":"electrum",
         "tx_explorer":"https://www.kmdexplorer.io/tx",
         "electrum": [{"url":"electrum1.cipig.net:10001"},
@@ -218,7 +218,6 @@ coins = {
     },
     "LINK":{
         "activate_with":"electrum",
-        "api-id": "chainlink",
         "tx_explorer":"https://etherscan.io/tx",
         "electrum": ["http://eth1.cipig.net:8555",
                      "http://eth2.cipig.net:8555",
@@ -226,7 +225,6 @@ coins = {
         "contract": "0x8500AFc0bc5214728082163326C2FF0C73f4a871",
     },
     "LTC":{
-        "api-id": "litecoin",
         "activate_with":"electrum",
         "tx_explorer":"https://live.blockcypher.com/ltc/tx",
         "electrum": [{"url":"electrum-ltc.bysh.me:50001"},
@@ -234,8 +232,19 @@ coins = {
                      {"url":"ltc.rentonisk.com:50001"},
                      {"url":"backup.electrum-ltc.org:50001"}],
     },
+    "MCL":{
+        "activate_with":"electrum",
+        "electrum": [{"url": "electrum1.cipig.net:10023"},
+                     {"url": "electrum2.cipig.net:10023"},
+                     {"url": "electrum3.cipig.net:10023"},
+                     {"url": "electrum1.cipig.net:20023",
+                      "protocol": "SSL"},
+                     {"url": "electrum2.cipig.net:20023",
+                      "protocol": "SSL"},
+                     {"url": "electrum3.cipig.net:20023",
+                      "protocol": "SSL"}],
+    },
     "MORTY":{
-        "api-id": "",
         "activate_with":"electrum",
         "tx_explorer":"https://morty.explorer.dexstats.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10018"},
@@ -243,7 +252,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10018"}],
     },
     "OOT":{
-        "api-id": "",
         "activate_with":"electrum",
         "tx_explorer":"https://oot.explorer.dexstats.info/tx",
         "electrum": [{"url": "electrum1.cipig.net:10021"},
@@ -257,7 +265,6 @@ coins = {
                       "protocol": "SSL"}],
     },
     "PANGEA":{
-        "api-id": "",
         "activate_with": "electrum",
         "electrum": [{
             "url": "electrum1.cipig.net:10010",
@@ -282,7 +289,6 @@ coins = {
         }],
     },
     "PAX":{
-        "api-id": "paxos-standard",
         "activate_with":"electrum",
         "tx_explorer":"https://etherscan.io/tx",
         "electrum": ["http://eth1.cipig.net:8555",
@@ -301,11 +307,9 @@ coins = {
                      {"url":"s6.qtum.info:50001"},
                      {"url":"s7.qtum.info:50001"},
                      {"url":"s8.qtum.info:50001"},
-                     {"url":"s9.qtum.info:50001"}
-                     ],
+                     {"url":"s9.qtum.info:50001"}],
     },
     "REVS":{
-        "api-id": "",
         "activate_with":"electrum",
         "tx_explorer":"https://revs.explorer.dexstats.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10003"},
@@ -327,7 +331,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10034"}],
     },
     "RICK":{
-        "api-id": "rick",
         "activate_with":"electrum",
         "tx_explorer":"https://rick.explorer.dexstats.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10017"},
@@ -335,7 +338,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10017"}],
     },
     "SAI":{
-        "api-id": "sai",
         "activate_with":"electrum",
         "tx_explorer":"https://etherscan.io/tx",
         "electrum": ["http://eth1.cipig.net:8555",
@@ -344,7 +346,6 @@ coins = {
         "contract": "0x8500AFc0bc5214728082163326C2FF0C73f4a871",
     },
     "SUPERNET":{
-        "api-id": "",
         "activate_with":"electrum",
         "tx_explorer":"https://supernet.explorer.dexstats.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10005"},
@@ -352,14 +353,12 @@ coins = {
                      {"url":"electrum3.cipig.net:10005"}],
     },
     "THC":{
-        "api-id": "",
         "activate_with":"electrum",
         "tx_explorer":"https://thc.explorer.dexstats.info/tx",
         "electrum": [{"url":"165.22.52.123:10022"},
                      {"url":"157.230.45.184:10022"}],
     },
-    "USDC":{
-        "api-id": "usd-coin",
+    "TUSD":{
         "activate_with":"electrum",
         "tx_explorer":"https://etherscan.io/tx",
         "electrum": ["http://eth1.cipig.net:8555",
@@ -367,8 +366,15 @@ coins = {
                      "http://eth3.cipig.net:8555"],
         "contract": "0x8500AFc0bc5214728082163326C2FF0C73f4a871",
     },
-    "TUSD":{
-        "api-id": "true-usd",
+    "USDC":{
+        "activate_with":"electrum",
+        "tx_explorer":"https://etherscan.io/tx",
+        "electrum": ["http://eth1.cipig.net:8555",
+                     "http://eth2.cipig.net:8555",
+                     "http://eth3.cipig.net:8555"],
+        "contract": "0x8500AFc0bc5214728082163326C2FF0C73f4a871",
+    },
+    "USDT":{
         "activate_with":"electrum",
         "tx_explorer":"https://etherscan.io/tx",
         "electrum": ["http://eth1.cipig.net:8555",
@@ -377,7 +383,6 @@ coins = {
         "contract": "0x8500AFc0bc5214728082163326C2FF0C73f4a871",
     },
     "VRSC":{
-        "api-id": "veruscoin",
         "activate_with":"electrum",
         "tx_explorer":"https://explorer.veruscoin.io/tx",
         "electrum": [{"url": "el0.veruscoin.io:17485"},
@@ -385,7 +390,6 @@ coins = {
                      {"url": "el2.veruscoin.io:17485"}],
     },
     "WLC":{
-        "api-id": "wirelesscoin",
         "activate_with":"electrum",
         "reserve_balance":2,
         "tx_explorer":"https://wlc.explorer.dexstats.info/tx",
@@ -394,7 +398,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10014"}],
     },
     "ZEC":{
-        "api-id": "zcash",
         "activate_with":"electrum",
         "tx_explorer":"https://explorer.zcha.in/transactions",
         "electrum": [{"url":"electrum3.cipig.net:10058"},
@@ -402,7 +405,6 @@ coins = {
                      {"url":"electrum3.cipig.net:10058"}],
     },
     "ZILLA":{
-        "api-id": "chainzilla",
         "activate_with":"electrum",
         "tx_explorer":"https://zilla.explorer.dexstats.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10028"},
