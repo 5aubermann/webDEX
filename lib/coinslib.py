@@ -399,6 +399,17 @@ coins = {
                      {"url":"electrum2.cipig.net:10014"},
                      {"url":"electrum3.cipig.net:10014"}],
     },
+    "XZC":{
+        "activate_with":"electrum",
+        "electrum": [{"url": "electrumx.zcoin.io:50001",
+                      "protocol": "TCP"},
+                     {"url": "electrumx01.zcoin.io:50001",
+                      "protocol": "TCP"},
+                     {"url": "electrumx02.zcoin.io:50001",
+                      "protocol": "TCP"},
+                     {"url": "electrumx03.zcoin.io:50001",
+                      "protocol": "TCP"}]
+    },
     "ZEC":{
         "activate_with":"electrum",
         "tx_explorer":"https://explorer.zcha.in/transactions",
