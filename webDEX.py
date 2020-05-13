@@ -10,7 +10,10 @@ price_prev = {'BET/KMD': None,
               'CRYPTO/KMD': None,
               'DEX/KMD': None,
               'HODL/KMD': None,
+              'ILN/KMD': None,
+              'JUMBLR/KMD': None,
               'LABS/KMD': None,
+              'MCL/KMD': None,
               'REVS/KMD': None,
               'RFOX/KMD': None,
               'SUPERNET/KMD': None,
@@ -310,7 +313,10 @@ def get_orderbook():
         crypto_price, price_prev['CRYPTO/KMD'] = get_assetchain_prices(rows, "CRYPTO/KMD", "KMD/CRYPTO", price_prev['CRYPTO/KMD'])
         dex_price, price_prev['DEX/KMD'] = get_assetchain_prices(rows, "DEX/KMD", "KMD/DEX", price_prev['DEX/KMD'])
         hodl_price, price_prev['HODL/KMD'] = get_assetchain_prices(rows, "HODL/KMD", "KMD/HODL", price_prev['HODL/KMD'])
+        iln_price, price_prev['ILN/KMD'] = get_assetchain_prices(rows, "ILN/KMD", "KMD/ILN", price_prev['ILN/KMD'])
+        jumblr_price, price_prev['JUMBLR/KMD'] = get_assetchain_prices(rows, "JUMBLR/KMD", "KMD/JUMBLR", price_prev['JUMBLR/KMD'])
         labs_price, price_prev['LABS/KMD'] = get_assetchain_prices(rows, "LABS/KMD", "KMD/LABS", price_prev['LABS/KMD'])
+        mcl_price, price_prev['MCL/KMD'] = get_assetchain_prices(rows, "MCL/KMD", "KMD/MCL", price_prev['MCL/KMD'])
         revs_price, price_prev['REVS/KMD'] = get_assetchain_prices(rows, "REVS/KMD", "KMD/REVS", price_prev['REVS/KMD'])
         rfox_price, price_prev['RFOX/KMD'] = get_assetchain_prices(rows, "RFOX/KMD", "KMD/RFOX", price_prev['RFOX/KMD'])
         supernet_price, price_prev['SUPERNET/KMD'] = get_assetchain_prices(rows, "SUPERNET/KMD", "KMD/SUPERNET", price_prev['SUPERNET/KMD'])
@@ -323,7 +329,10 @@ def get_orderbook():
         crypto_price = None
         dex_price = None
         hodl_price = None
+        iln_price = None
+        jumblr_price = None
         labs_price = None
+        mcl_price = None
         revs_price = None
         rfox_price = None
         supernet_price = None
@@ -373,6 +382,12 @@ def get_orderbook():
                         base_usd_prices.append(crypto_price * kmd_price)
                     elif base_ask[i] == "ZILLA":
                         base_usd_prices.append(zilla_price * kmd_price)
+                    elif base_ask[i] == "ILN":
+                        base_usd_prices.append(iln_price * kmd_price)
+                    elif base_ask[i] == "JUMBLR":
+                        base_usd_prices.append(jumblr_price * kmd_price)
+                    elif base_ask[i] == "MCL":
+                        base_usd_prices.append(mcl_price * kmd_price)
                     else:
                         base_usd_prices.append(None)
                 except TypeError:
@@ -410,6 +425,12 @@ def get_orderbook():
                         rel_usd_prices.append(crypto_price * kmd_price)
                     elif rel_ask[i] == "ZILLA":
                         rel_usd_prices.append(zilla_price * kmd_price)
+                    elif rel_ask[i] == "ILN":
+                        rel_usd_prices.append(iln_price * kmd_price)
+                    elif rel_ask[i] == "JUMBLR":
+                        rel_usd_prices.append(jumblr_price * kmd_price)
+                    elif rel_ask[i] == "MCL":
+                        rel_usd_prices.append(mcl_price * kmd_price)
                     else:
                         rel_usd_prices.append(None)
                 except TypeError:
