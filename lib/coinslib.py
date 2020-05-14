@@ -374,16 +374,6 @@ coins = {
                      "http://eth3.cipig.net:8555"],
         "contract": "0x8500AFc0bc5214728082163326C2FF0C73f4a871",
     },
-    """
-    "USDT":{
-        "activate_with":"electrum",
-        "tx_explorer":"https://etherscan.io/tx",
-        "electrum": ["http://eth1.cipig.net:8555",
-                     "http://eth2.cipig.net:8555",
-                     "http://eth3.cipig.net:8555"],
-        "contract": "0x8500AFc0bc5214728082163326C2FF0C73f4a871",
-    },
-    """
     "VRSC":{
         "activate_with":"electrum",
         "tx_explorer":"https://explorer.veruscoin.io/tx",
