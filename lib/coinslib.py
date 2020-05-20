@@ -134,6 +134,18 @@ coins = {
                      {"url":"electrum2.cipig.net:10060"},
                      {"url":"electrum3.cipig.net:10060"}],
     },
+    "ECA":{
+        "activate_with":"electrum",
+        "electrum": [{"url": "electrum1.cipig.net:10052"},
+                     {"url": "electrum2.cipig.net:10052"},
+                     {"url": "electrum3.cipig.net:10052"},
+                     {"url": "electrum1.cipig.net:20052",
+                      "protocol": "SSL"},
+                     {"url": "electrum2.cipig.net:20052",
+                      "protocol": "SSL"},
+                     {"url": "electrum3.cipig.net:20052",
+                      "protocol": "SSL"}]
+    },
     "EMC2":{
         "activate_with":"electrum",
         "electrum": [{
