@@ -146,7 +146,7 @@ def cancel_order():
 @app.route('/cancelled-order', methods=['POST'])
 def cancelled_order():
     head = """<title>Cancelled Order</title>
-              <meta http-equiv="refresh" content="4; URL=../my-open-orders" />"""
+              <meta http-equiv="refresh" content="4; URL=../orderbook" />"""
     body = cancel_uuid(request.form.get('uuid')).text
     return html_frame(head, body)
 
