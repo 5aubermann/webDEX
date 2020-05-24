@@ -26,27 +26,15 @@ coins = {
     },
     "BET":{
         "activate_with":"electrum",
-        "electrum": [{
-            "url": "electrum1.cipig.net:10012"
-        },
-        {
-            "url": "electrum2.cipig.net:10012"
-        },
-        {
-            "url": "electrum3.cipig.net:10012"
-        },
-        {
-            "url": "electrum1.cipig.net:20012",
-            "protocol": "SSL"
-        },
-        {
-            "url": "electrum2.cipig.net:20012",
-            "protocol": "SSL"
-        },
-        {
-            "url": "electrum3.cipig.net:20012",
-            "protocol": "SSL",
-        }],
+        "electrum": [{"url": "electrum1.cipig.net:10012"},
+                     {"url": "electrum2.cipig.net:10012"},
+                     {"url": "electrum3.cipig.net:10012"},
+                     {"url": "electrum1.cipig.net:20012",
+                      "protocol": "SSL"},
+                     {"url": "electrum2.cipig.net:20012",
+                      "protocol": "SSL"},
+                     {"url": "electrum3.cipig.net:20012",
+                      "protocol": "SSL"}],
     },
     "BOTS":{
         "activate_with":"electrum",
@@ -148,15 +136,9 @@ coins = {
     },
     "EMC2":{
         "activate_with":"electrum",
-        "electrum": [{
-            "url": "electrum3.cipig.net:10062",
-            },
-            {
-                "url": "electrum2.cipig.net:10062",
-            },
-            {
-                "url": "electrum1.cipig.net:10062",
-            }],
+        "electrum": [{"url": "electrum3.cipig.net:10062"},
+                     {"url": "electrum2.cipig.net:10062"},
+                     {"url": "electrum1.cipig.net:10062"}],
     },
     "ETH":{
         "activate_with":"electrum",
@@ -168,27 +150,15 @@ coins = {
     },
     "HODL":{
         "activate_with":"electrum",
-        "electrum": [{
-            "url": "electrum1.cipig.net:10009"
-        },
-        {
-            "url": "electrum2.cipig.net:10009"
-        },
-        {
-            "url": "electrum3.cipig.net:10009"
-        },
-        {
-            "url": "electrum1.cipig.net:20009",
-            "protocol": "SSL"
-        },
-        {
-            "url": "electrum2.cipig.net:20009",
-            "protocol": "SSL"
-        },
-        {
-            "url": "electrum3.cipig.net:20009",
-            "protocol": "SSL"
-        }],
+        "electrum": [{"url": "electrum1.cipig.net:10009"},
+                     {"url": "electrum2.cipig.net:10009"},
+                     {"url": "electrum3.cipig.net:10009"},
+                     {"url": "electrum1.cipig.net:20009",
+                      "protocol": "SSL"},
+                     {"url": "electrum2.cipig.net:20009",
+                      "protocol": "SSL"},
+                     {"url": "electrum3.cipig.net:20009",
+                      "protocol": "SSL"}],
     },
     "HUSH":{
         "activate_with":"electrum",
@@ -278,27 +248,15 @@ coins = {
     },
     "PANGEA":{
         "activate_with": "electrum",
-        "electrum": [{
-            "url": "electrum1.cipig.net:10010",
-        },
-        {
-            "url": "electrum2.cipig.net:10010",
-        },
-        {
-            "url": "electrum3.cipig.net:10010",
-        },
-        {
-            "url": "electrum1.cipig.net:20010",
-            "protocol": "SSL"
-        },
-        {
-            "url": "electrum2.cipig.net:20010",
-            "protocol": "SSL"
-        },
-        {
-            "url": "electrum3.cipig.net:20010",
-            "protocol": "SSL"
-        }],
+        "electrum": [{"url": "electrum1.cipig.net:10010"},
+                     {"url": "electrum2.cipig.net:10010"},
+                     {"url": "electrum3.cipig.net:10010"},
+                     {"url": "electrum1.cipig.net:20010",
+                      "protocol": "SSL"},
+                     {"url": "electrum2.cipig.net:20010",
+                      "protocol": "SSL"},
+                     {"url": "electrum3.cipig.net:20010",
+                      "protocol": "SSL"}],
     },
     "PAX":{
         "activate_with":"electrum",
@@ -349,14 +307,6 @@ coins = {
                      {"url":"electrum2.cipig.net:10017"},
                      {"url":"electrum3.cipig.net:10017"}],
     },
-    "SAI":{
-        "activate_with":"electrum",
-        "tx_explorer":"https://etherscan.io/tx",
-        "electrum": ["http://eth1.cipig.net:8555",
-                     "http://eth2.cipig.net:8555",
-                     "http://eth3.cipig.net:8555"],
-        "contract": "0x8500AFc0bc5214728082163326C2FF0C73f4a871",
-    },
     "SUPERNET":{
         "activate_with":"electrum",
         "tx_explorer":"https://supernet.explorer.dexstats.info/tx",
@@ -395,7 +345,6 @@ coins = {
     },
     "WLC":{
         "activate_with":"electrum",
-        "reserve_balance":2,
         "tx_explorer":"https://wlc.explorer.dexstats.info/tx",
         "electrum": [{"url":"electrum1.cipig.net:10014"},
                      {"url":"electrum2.cipig.net:10014"},
