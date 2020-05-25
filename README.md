@@ -62,7 +62,7 @@ http://localhost:5000/orderbook
 - For example the search for - btc eth kmd - shows you all available order combinations of these coins between each other
 - Press 'Enter' to show only cheap orders
 - Click on a cointag highlights all coins with this tag in blue color
-- Oracle price feed is from coinpaprika.com (prices for DEX, CHIPS, REVS and SUPERNET are chosen manually)
+- Oracle price feeds are from coinpaprika.com and dexstats.info
 - Autorefresh every 5 minutes
 ```
 Addresses:
