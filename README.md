@@ -1,5 +1,7 @@
 # webDEX
 
+## THIS SOFTWARE IS DEPRECATED! PLEASE VISIT [https://atomicdex.io/](https://atomicdex.io/).
+
 ### A Python Application for using [Komodo Platform](https://komodoplatform.com/)'s [atomicDEX](https://atomicdex.io/) in the browser.
 
 ### Build upon pytomicDEX. Shout out to smk762.
